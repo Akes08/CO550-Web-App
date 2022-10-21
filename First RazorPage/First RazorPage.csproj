@@ -7,4 +7,20 @@
     <RootNamespace>First_RazorPage</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Pages\HelloWorld.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\HelloWorld.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\HelloWorld.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\HelloWorld.cshtml" />
+  </ItemGroup>
+
 </Project>

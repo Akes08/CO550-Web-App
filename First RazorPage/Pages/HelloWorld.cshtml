@@ -1,0 +1,22 @@
+﻿@page
+@model First_RazorPage.Pages.HelloWorldModel
+@{
+	ViewData["Title"] = "HelloWorld";
+}
+
+<h2>Hello World</h2>
+
+<h3>The time on this server is @DateTime.Now</h3>
+
+<form method="POST">
+    <div>Name: <input type="text" asp-for="name" /></div>
+    <input type="submit" value="Send" />
+</form>
+
+<div id="result">@this.Model.name</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
