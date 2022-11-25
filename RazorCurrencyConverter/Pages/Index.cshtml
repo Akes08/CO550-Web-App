@@ -7,5 +7,19 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <h2>by Akes Ali</h2>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>CURRENCY CONVERTER</a>.</p>
+        
+    <form method="post" class="mx-auto" style="width:200px">
+        <p class="mb-3">
+            <label for="amount">Enter amount in £ to convert to $:</label>
+            <input asp-for="@Model.x" class="form-control" type="number" class="form-control" value="1">
+        </p>
+
+        <p class="mb-3">
+            <button type="submit" style="border:solid" class="btn btn primary">Calculate</button>
+        </p>
+        <p class="mb-3">
+            @ViewData["Message"]
+        </p>
+    </form>
 </div>
