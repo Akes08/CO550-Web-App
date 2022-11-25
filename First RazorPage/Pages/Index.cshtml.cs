@@ -1,29 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Primitives;
 
-namespace First_RazorPage.Pages
+namespace First_RazorPage
 {
     public class IndexModel : PageModel
     {
-        public string FullName { get; set; }
-
-        public string Email { get; set; }
-
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+        public StringValues FullName;
 
         public void OnGet()
         {
             FullName = "Akes Ali";
         }
-        
+
         public void OnPost()
         {
-            ViewData["Message"] = "Hello" + FullName;
+            this.FullName = Request.Form["FullName"];
         }
     }
 }
