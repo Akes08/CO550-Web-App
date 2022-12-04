@@ -1,4 +1,5 @@
 using ASP_RazorContoso.Data;
+using ASP_RazorContoso.Data.Migrations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,9 +33,9 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
-    var context = services.GetRequiredService<SchoolContext>();
+    var context = services.GetRequiredService<ApplicationDbContext>();
     context.Database.EnsureCreated();
-    // DbInitializer.Initialize(context);
+    DbInitialiser.Initialize(context);
 }
 
 app.UseHttpsRedirection();
