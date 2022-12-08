@@ -6,6 +6,8 @@ namespace ASP_MVC_Contoso.Data.Migrations
     {
         public static void Initialize(ApplicationDbContext context)
         {
+            context.Database.EnsureCreated();
+
             // Look for any students.
             if (context.Students.Any())
             {
@@ -23,8 +25,10 @@ namespace ASP_MVC_Contoso.Data.Migrations
                 new Student{FirstName="Fahhad",LastName="Ahmed",EnrollmentDate=DateTime.Parse("2018-09-01")},
                 new Student{FirstName="Rahim",LastName="Shakil",EnrollmentDate=DateTime.Parse("2019-09-01")}
             };
-
-            context.Students.AddRange(students);
+            foreach (Student s in students)
+            {
+                context.Students.Add(s);
+            }
             context.SaveChanges();
 
             var courses = new Course[]
@@ -37,8 +41,10 @@ namespace ASP_MVC_Contoso.Data.Migrations
                 new Course{CourseID=2021,Title="Business & IT",Credits=3},
                 new Course{CourseID=2042,Title="Dance",Credits=4}
             };
-
-            context.Courses.AddRange(courses);
+            foreach (Course c in courses)
+            {
+                context.Courses.Add(c);
+            }
             context.SaveChanges();
 
             var enrollments = new Enrollment[]
@@ -56,8 +62,10 @@ namespace ASP_MVC_Contoso.Data.Migrations
                 new Enrollment{StudentID=6,CourseID=1045},
                 new Enrollment{StudentID=7,CourseID=3141,Grade=Grades.A},
             };
-
-            context.Enrollments.AddRange(enrollments);
+            foreach (Enrollment e in enrollments)
+            {
+                context.Enrollments.Add(e);
+            }
             context.SaveChanges();
         }
     }
