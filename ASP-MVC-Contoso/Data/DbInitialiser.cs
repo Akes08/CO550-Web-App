@@ -6,8 +6,6 @@ namespace ASP_MVC_Contoso.Data.Migrations
     {
         public static void Initialize(ApplicationDbContext context)
         {
-            context.Database.EnsureCreated();
-
             // Look for any students.
             if (context.Students.Any())
             {
