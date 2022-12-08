@@ -33,7 +33,7 @@ namespace ASP_RazorContoso.Pages.Students
 
             Student = await _context.Students
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.StudentID == id);
 
             if (Student == null)
             {
