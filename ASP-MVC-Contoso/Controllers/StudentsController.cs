@@ -38,6 +38,7 @@ namespace ASP_MVC_Contoso.Controllers
                     .ThenInclude(e => e.Course)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.StudentID == id);
+            if (student == null)
             {
                 return NotFound();
             }
