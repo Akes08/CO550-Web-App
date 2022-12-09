@@ -1,0 +1,22 @@
+﻿@using ExampleBlazorApp.Models
+@using ExampleBlazorApp.Services
+@using ExampleBlazorApp.Shared
+
+@* UI Section *@
+
+<h3>Product List</h3>
+
+
+@foreach(Product item in Products)
+{
+    <ProductView product="item"></ProductView>
+}
+
+@* Code Section *@
+@code {
+
+    [EditorRequired]
+    [Parameter]
+    public List<Product> Products { get; set; } = ProductService.Products.ToList();
+
+}
