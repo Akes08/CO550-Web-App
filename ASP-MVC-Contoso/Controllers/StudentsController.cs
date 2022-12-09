@@ -26,24 +26,35 @@ namespace ASP_MVC_Contoso.Controllers
         }
 
         // GET: Students/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            if (id == null || _context.Students == null)
-            {
-                return NotFound();
-            }
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["CurrentFilter"] = searchString;
 
-            var student = await _context.Students
-                .Include(s => s.Enrollments)
-                    .ThenInclude(e => e.Course)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.StudentID == id);
-            if (student == null)
+            var students = from s in _context.Students
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
             {
-                return NotFound();
+                students = students.Where(s => s.LastName.Contains(searchString)
+                                       || s.FirstName.Contains(searchString));
             }
-
-            return View(student);
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    students = students.OrderByDescending(s => s.LastName);
+                    break;
+                case "Date":
+                    students = students.OrderBy(s => s.EnrollmentDate);
+                    break;
+                case "date_desc":
+                    students = students.OrderByDescending(s => s.EnrollmentDate);
+                    break;
+                default:
+                    students = students.OrderBy(s => s.LastName);
+                    break;
+            }
+            return View(await students.AsNoTracking().ToListAsync());
         }
 
         // GET: Students/Create
